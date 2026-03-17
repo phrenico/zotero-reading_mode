@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- Outer rectangle representing the window/frame -->
+  <rect x="4" y="4" width="40" height="40" rx="3" ry="3"
+        fill="none" stroke="#0071BC" stroke-width="3"/>
+  <!-- Expand/fullscreen arrows in each corner -->
+  <!-- Top-left corner arrow -->
+  <polyline points="8,16 8,8 16,8" fill="none" stroke="#0071BC" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Top-right corner arrow -->
+  <polyline points="40,16 40,8 32,8" fill="none" stroke="#0071BC" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Bottom-left corner arrow -->
+  <polyline points="8,32 8,40 16,40" fill="none" stroke="#0071BC" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Bottom-right corner arrow -->
+  <polyline points="40,32 40,40 32,40" fill="none" stroke="#0071BC" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Document lines in center to represent a PDF -->
+  <line x1="17" y1="20" x2="31" y2="20" stroke="#0071BC" stroke-width="2"
+        stroke-linecap="round" opacity="0.7"/>
+  <line x1="17" y1="24" x2="31" y2="24" stroke="#0071BC" stroke-width="2"
+        stroke-linecap="round" opacity="0.7"/>
+  <line x1="17" y1="28" x2="27" y2="28" stroke="#0071BC" stroke-width="2"
+        stroke-linecap="round" opacity="0.7"/>
+</svg>

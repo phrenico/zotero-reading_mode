@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "Zotero Reading Mode",
+  "version": "1.0.0",
+  "description": "Fullscreen PDF reading mode for Zotero 8 – hides the surrounding UI and enters HTML5 fullscreen so you can focus entirely on your document.",
+  "homepage_url": "https://github.com/phrenico/zotero-reading_mode",
+  "applications": {
+    "zotero": {
+      "id": "zotero-reading-mode@phrenico",
+      "strict_min_version": "6.999",
+      "strict_max_version": "8.*"
+    },
+    "gecko": {
+      "id": "zotero-reading-mode@phrenico",
+      "strict_min_version": "115.0"
+    }
+  },
+  "icons": {
+    "48": "chrome/skin/default/icon.svg"
+  }
+}
