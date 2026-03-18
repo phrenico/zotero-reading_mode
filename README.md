@@ -2,6 +2,7 @@
 
 A lightweight Zotero 8 plugin that adds a **true fullscreen reading mode** for the built-in PDF viewer. It hides *everything* — window title bar, menu bar, tab bar, annotation toolbar, side panes — and enters OS-level fullscreen so you can focus entirely on your document.
 
+
 ## Features
 
 - **True fullscreen** – hides the OS window title bar, Zotero menu bar, tab bar, annotation toolbar, side panes, and all other chrome. Only the PDF remains.
@@ -30,6 +31,13 @@ Built as a **bootstrapped extension** using `manifest_version: 2`, targeting Fir
 
 - Press `F11` while viewing a PDF to enter/exit reading mode.
 - Press `Esc` to exit fullscreen (the plugin detects this and cleanly rolls back).
+
+## Comparison: Standard vs. Reading Mode
+
+| Zotero 8 Default View | True Fullscreen (F11) |
+| :--- | :--- |
+| ![Before](screenshots/before.png) | ![After](screenshots/after.png) |
+
 
 ## Building from Source
 
