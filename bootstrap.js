@@ -140,6 +140,51 @@ class ReadingMode {
         || Services.wm.getMostRecentWindow("zotero:main");
   }
 
+  /**
+   * Returns the reader container element for the currently active Zotero tab.
+   *
+   * Zotero 8 uses isolated tab contexts; the global document query will often
+   * return an old reader node from a previously opened tab.
+   */
+  _getActiveReaderElement(doc) {
+    if (!doc) return null;
+
+    const isVisible = (el) => {
+      if (!el) return false;
+      if (el.hidden) return false;
+      try {
+        const cs = el.ownerDocument.defaultView.getComputedStyle(el);
+        return cs && cs.display !== "none" && cs.visibility !== "hidden";
+      } catch (e) {
+        return true;
+      }
+    };
+
+    // 1) Prefer Zotero.Reader API if available (most reliable for active tab)
+    try {
+      const activeTabID = Zotero?.getActiveZoteroPane?.()?.getSelectedTabID?.();
+      const reader = Zotero?.Reader?.getByTabID?.(activeTabID);
+      if (reader) {
+        const iframe = reader._iframe || reader._iframeWindow?.frameElement;
+        if (iframe) {
+          const el = iframe.closest?.(".reader") || iframe;
+          if (isVisible(el)) return el;
+        }
+      }
+    } catch (e) {
+      // best-effort
+    }
+
+    // 2) Try to find a visible reader in the current document (works when inactive tabs are hidden)
+    const candidates = Array.from(doc.querySelectorAll("#zotero-reader, #zotero-reader-container, .reader-container, .reader"));
+    for (const el of candidates) {
+      if (isVisible(el)) return el;
+    }
+
+    // 3) Fallback: first reader-like element
+    return candidates[0] || null;
+  }
+
   // -------------------------------------------------------------------------
   // CSS injection
   // -------------------------------------------------------------------------
@@ -654,10 +699,7 @@ window,
     // 6. Enter fullscreen — try requestFullscreen() on the reader element
     //    first (DOM-level fullscreen bypasses XUL layout entirely), fall
     //    back to window.fullScreen if unavailable.
-    const reader = doc.querySelector("#zotero-reader")
-                || doc.querySelector("#zotero-reader-container")
-                || doc.querySelector(".reader-container")
-                || doc.querySelector(".reader");
+    const reader = this._getActiveReaderElement(doc);
 
     this._fullscreenElement = null;
     if (reader && typeof reader.requestFullscreen === "function") {
@@ -1130,11 +1172,8 @@ window,
    * any unknown wrapper, spacer, or toolbar that sits above/around the reader.
    */
   _collapseNonReaderSiblings(doc) {
-    // Find the reader element
-    const reader = doc.querySelector("#zotero-reader")
-                || doc.querySelector("#zotero-reader-container")
-                || doc.querySelector(".reader-container")
-                || doc.querySelector(".reader");
+    // Find the reader element (must be the active tab's reader)
+    const reader = this._getActiveReaderElement(doc);
     if (!reader) return;
 
     let current = reader;
