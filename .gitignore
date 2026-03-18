@@ -1,0 +1,32 @@
+# Node.js dependencies (if using Node)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build directories
+dist/
+build/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Extension package files (you might want to ignore .xpi if it's built locally)
+*.xpi
+
+# Misc
+.env
+.idea/
+.vscode/
+.sublime-project
+.sublime-workspace
+
+# Ignore Chrome/Firefox extension packing artifacts
+*.crx
+*.zip
+
+# Ignore test coverage output
+coverage/
